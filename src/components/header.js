@@ -5,8 +5,8 @@ import Navbar from 'react-bootstrap/Navbar'
 
 import Favicon from './favicon'
 
-const Header = ({ siteTitle }) => (
-  <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
+const Header = ({ siteTitle, toggleTransparent = false }) => (
+  <Navbar bg={toggleTransparent ? "toggle-transparent" : "dark"} variant={toggleTransparent ? "" : "dark"} expand="md" fixed="top" id={'gatsby-site-navbar'}>
     <Navbar.Brand href="/">
       <Favicon />{' '}
       {siteTitle}
