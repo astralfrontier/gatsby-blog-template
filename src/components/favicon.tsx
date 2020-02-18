@@ -26,7 +26,7 @@ const Favicon = () => {
     }
   `)
 
-  return <Img fixed={data.placeholderImage.childImageSharp.fixed} className={"d-inline-block align-top"} alt={"Site Icon"} />
+  return (<Img fixed={data.placeholderImage.childImageSharp.fixed} className={"d-inline-block align-top"} alt={"Site Icon"} />)
 }
 
 export default Favicon

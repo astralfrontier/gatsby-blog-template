@@ -19,6 +19,7 @@ module.exports = {
     author,
   },
   plugins: [
+    `gatsby-plugin-typescript`,
     `gatsby-plugin-netlify-cms`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-catch-links`,

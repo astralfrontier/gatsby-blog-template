@@ -49,8 +49,8 @@ exports.createPages = async ({
     return
   }
 
-  const pageListTemplate = path.resolve(`src/templates/page-list.js`)
-  const pageTemplate = path.resolve(`src/templates/page.js`)
+  const pageListTemplate = path.resolve(`src/templates/page-list.tsx`)
+  const pageTemplate = path.resolve(`src/templates/page.tsx`)
   const postsPerPage = 6
 
   const posts = filter(pathEq(['node', 'parent', 'sourceInstanceName'], 'blog'), result.data.allMarkdownRemark.edges)
