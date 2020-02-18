@@ -3,9 +3,12 @@ import PropTypes from "prop-types"
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 
+import Favicon from './favicon'
+
 const Header = ({ siteTitle }) => (
   <Navbar bg="dark" variant="dark" expand="lg" fixed="top">
     <Navbar.Brand href="/">
+      <Favicon />{' '}
       {siteTitle}
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
