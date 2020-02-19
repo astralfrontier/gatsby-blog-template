@@ -19,7 +19,9 @@ const PageList = ({
   <Layout toggleTransparent={false}>
     <SEO title={currentPage === 1 ? "Home" : `Page ${currentPage}`} />
     <Container fluid={true}>
-      {edges.map(({ node }: {node: BlogPage}) => <Row key={node.fields.slug}><Col><PageCard page={node} /></Col></Row>)}
+      <Row>
+        {edges.map(({ node }: {node: BlogPage}) => <Col key={node.fields.slug}><PageCard page={node} /></Col>)}
+      </Row>
       {(numPages > 1) && (
       <Row className="justify-content-md-center">
         <Col md="auto">{paginationFor("", numPages, currentPage)}</Col>
@@ -50,6 +52,13 @@ export const pageListQuery = graphql`
             title
             path
             description
+            featuredImage {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
         }
       }

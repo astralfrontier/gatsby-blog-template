@@ -1,5 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
+
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -10,13 +12,15 @@ export default function Page({
   data, // this prop will be injected by the GraphQL query below.
 }) {
   const { markdownRemark } = data // data.markdownRemark holds your post data
-  const { frontmatter: {title, description}, html } = markdownRemark
+  const { frontmatter: {title, description, featuredImage}, html } = markdownRemark
+  const imageTag = featuredImage ? <Img fluid={featuredImage.childImageSharp.fluid} /> : <></>
   return (
     <Layout>
       <SEO title={title} description={description} />
-      <Container>
+      <Container fluid={true}>
         <Row>
           <Col>
+            {imageTag}
             <div
               className="blog-post-content"
               dangerouslySetInnerHTML={{ __html: html }}
@@ -36,6 +40,13 @@ export const pageQuery = graphql`
         path
         title
         description
+        featuredImage {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }

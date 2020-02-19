@@ -2,6 +2,12 @@ const { name, description, author } = require('./package.json')
 
 // Defined separately so that we can reuse the same plugins for mdx
 const remarkPlugins = [
+  {
+    resolve: `gatsby-remark-images`,
+    options: {
+      maxWidth: 800
+    }
+  },
   `gatsby-remark-smartypants`,
   {
     resolve: `gatsby-remark-external-links`,
