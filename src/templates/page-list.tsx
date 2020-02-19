@@ -16,7 +16,7 @@ const PageList = ({
   },
   pageContext: { numPages, currentPage },
 }) => (
-  <Layout toggleTransparent={true}>
+  <Layout toggleTransparent={false}>
     <SEO title={currentPage === 1 ? "Home" : `Page ${currentPage}`} />
     <Container fluid={true}>
       {edges.map(({ node }: {node: BlogPage}) => <Row key={node.fields.slug}><Col><PageCard page={node} /></Col></Row>)}
@@ -40,11 +40,13 @@ export const pageListQuery = graphql`
     ) {
       edges {
         node {
+          excerpt(pruneLength: 200)
+          timeToRead
           fields {
             slug
           }
           frontmatter {
-            date
+            date(formatString: "MMM D YYYY")
             title
             path
             description
