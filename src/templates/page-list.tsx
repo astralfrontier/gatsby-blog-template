@@ -46,11 +46,11 @@ export const pageListQuery = graphql`
           timeToRead
           fields {
             slug
+            path
           }
           frontmatter {
             date(formatString: "MMM D YYYY")
             title
-            path
             description
             featuredImage {
               childImageSharp {

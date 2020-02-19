@@ -5,13 +5,13 @@ import Img from "gatsby-image"
 import Card from "react-bootstrap/Card"
 
 export interface BlogPageFields {
-  slug?: string | undefined;
+  slug: string;
+  path: string;
 }
 
 export interface BlogPageFrontMatter {
   date?: string | undefined;
   title?: string | undefined;
-  path?: string | undefined;
   description?: string | undefined;
   featuredImage?: any;
 }
@@ -29,7 +29,7 @@ const PageCard = ({page}: {page: BlogPage}) => {
   <Card key={page.fields.slug}>
     {imageTag}
     <Card.Body>
-      <Card.Title><Link to={page.frontmatter.path}>{page.frontmatter.title || page.fields.slug}</Link></Card.Title>
+      <Card.Title><Link to={page.fields.path}>{page.frontmatter.title || page.fields.slug}</Link></Card.Title>
       <Card.Body>
         {page.frontmatter.description || page.excerpt}<br />
         {page.frontmatter.date} - {page.timeToRead} min read

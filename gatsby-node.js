@@ -1,16 +1,19 @@
 const { createFilePath } = require(`gatsby-source-filesystem`)
 const path = require(`path`)
 
-const { filter, pathEq } = require(`ramda`)
-
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
   if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+    const slug = createFilePath({ node, getNode })
     createNodeField({
       name: `slug`,
       node,
-      value,
+      value: slug,
+    })
+    createNodeField({
+      name: `path`,
+      node,
+      value: node.frontmatter.path || slug
     })
   }
 }
@@ -30,14 +33,7 @@ exports.createPages = async ({
           node {
             fields {
               slug
-            }
-            frontmatter {
               path
-            }
-            parent {
-              ... on File {
-                sourceInstanceName
-              }
             }
           }
         }
@@ -53,7 +49,7 @@ exports.createPages = async ({
   const pageTemplate = path.resolve(`src/templates/page.tsx`)
   const postsPerPage = 6
 
-  const posts = filter(pathEq(['node', 'parent', 'sourceInstanceName'], 'blog'), result.data.allMarkdownRemark.edges)
+  const posts = result.data.allMarkdownRemark.edges
   const numPages = Math.ceil(posts.length / postsPerPage)
   Array.from({ length: numPages }).forEach((_, i) => {
     createPage({
@@ -68,9 +64,9 @@ exports.createPages = async ({
     })
   })
 
-  result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+  posts.forEach(({ node }) => {
     createPage({
-      path: node.frontmatter.path,
+      path: node.fields.path,
       component: pageTemplate,
       context: {},
     })
