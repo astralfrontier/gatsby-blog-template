@@ -1,12 +1,8 @@
 ---
-date: 2020-02-17T22:49:12-08:00
-title: First Post
-path: /gobble-gobble
-description: First post!
-featuredImage: ../images/Cloud_banner.jpg
-category: Demo
+date: 2020-02-26T22:49:12-08:00
+title: Third Post
+description: What happens now?
 tags:
-  - demo
   - useless
 ---
 
