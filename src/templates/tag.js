@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 
-import PageListCards from '../components/page-list-cards'
+import PageListCols from '../components/page-list-cols'
 
 const PageList = ({
   data: {
@@ -13,7 +13,7 @@ const PageList = ({
 }) => (
   <Layout toggleTransparent={false}>
     <SEO title={`Posts tagged "${tag}"`} />
-    <PageListCards pages={edges} numPages={1} currentPage={1} />
+    <PageListCols pages={edges} numPages={1} currentPage={1} />
   </Layout>
 )
 

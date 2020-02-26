@@ -31,7 +31,7 @@ export default function Page({
         <Row>
           <Col>
             {category && (<Link className={'small-caps'} to={`/category/${category}`}>{category}</Link>)}
-            <h1 className={'display-3'}>{title}</h1>
+            <h1>{title}</h1>
             <small className={"small-caps"}>{date} - {timeToRead} min read</small>
             <hr />
             <div
