@@ -12,7 +12,7 @@ import Footer from "./footer"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './layout.css'
 
-const Layout = ({ children, toggleTransparent = false }) => {
+const Layout = ({ children, toggleTransparent = false, paddingTop = true }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -28,15 +28,9 @@ const Layout = ({ children, toggleTransparent = false }) => {
       <header>
         <Header siteTitle={data.site.siteMetadata.title} toggleTransparent={toggleTransparent} />
       </header>
-      <Container>
-        <Row>
-          <Col>
-            <main>
-              {children}
-            </main>
-          </Col>
-        </Row>
-      </Container>
+      <main className={paddingTop ? "padding-top" : ""}>
+        {children}
+      </main>
       <footer>
         <Footer />
       </footer>

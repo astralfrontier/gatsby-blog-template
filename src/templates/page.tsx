@@ -16,6 +16,7 @@ export default function Page({
     frontmatter: { date, title, description, featuredImage },
     fields: {category, tags},
     html,
+    timeToRead
   } = markdownRemark
   const imageTag = featuredImage ? (
     <Img fluid={featuredImage.childImageSharp.fluid} />
@@ -23,19 +24,20 @@ export default function Page({
     <></>
   )
   return (
-    <Layout>
+    <Layout toggleTransparent={!!featuredImage} paddingTop={!featuredImage}>
       <SEO title={title} description={description} />
-      <Container fluid={true}>
+      {imageTag}
+      <Container>
         <Row>
           <Col>
-            <h1 className="mt-4">{title}</h1>
-            <p>Posted on {date}</p>
-            {imageTag}
+            {category && (<Link className={'small-caps'} to={`/category/${category}`}>{category}</Link>)}
+            <h1 className={'display-3'}>{title}</h1>
+            <small className={"small-caps"}>{date} - {timeToRead} min read</small>
+            <hr />
             <div
               className="blog-post-content"
               dangerouslySetInnerHTML={{ __html: html }}
             />
-            {category && (<Link to={`/category/${category}`}>{category}</Link>)}
             {tags && (
             tags.map(tag => (
               <Link to={`/tags/${tag}`} className="badge badge-primary p-2 m-1">
@@ -53,6 +55,7 @@ export const pageQuery = graphql`
   query($path: String!) {
     markdownRemark(fields: { path: { eq: $path } }) {
       html
+      timeToRead
       frontmatter {
         date(formatString: "MMMM DD, YYYY")
         title

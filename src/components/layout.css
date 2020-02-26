@@ -1,4 +1,4 @@
-body {
+.padding-top {
   padding-top: 60px;
 }
 
@@ -6,4 +6,8 @@ blockquote {
   border-left: solid gray;
   font-style: italic;
   padding-left: 0.5em;
+}
+
+.small-caps {
+  font-variant: small-caps;
 }

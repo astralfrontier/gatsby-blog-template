@@ -49,7 +49,7 @@ const PageCard = ({ page }: { page: BlogPage }) => {
         <Card.Body>
           {page.frontmatter.description || page.excerpt}
           <br />
-          {page.frontmatter.date} - {page.timeToRead} min read
+          <small className={"small-caps"}>{page.frontmatter.date} - {page.timeToRead} min read</small>
         </Card.Body>
       </Card.Body>
     </Card>

@@ -22,6 +22,7 @@ export default PageList
 export const pageQuery = graphql`
   query CategoryPage($category: String) {
     allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
       limit: 1000
       filter: { fields: { category: { eq: $category } } }
     ) {
@@ -37,7 +38,7 @@ export const pageQuery = graphql`
           timeToRead
           frontmatter {
             title
-            date
+            date(formatString: "MMM D YYYY")
           }
         }
       }
