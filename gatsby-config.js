@@ -1,4 +1,4 @@
-const { name, description, author } = require('./package.json')
+const { name, description, author, homepage } = require('./package.json')
 
 // Defined separately so that we can reuse the same plugins for mdx
 const remarkPlugins = [
@@ -23,6 +23,7 @@ module.exports = {
     title: name,
     description,
     author,
+    siteUrl: homepage
   },
   plugins: [
     `gatsby-plugin-typescript`,
