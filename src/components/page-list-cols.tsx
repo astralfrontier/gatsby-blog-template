@@ -2,11 +2,25 @@ import React from "react"
 import { Link } from "gatsby"
 import Img from "gatsby-image"
 
+import { drop, take, splitEvery } from 'ramda'
+
 import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 
 import paginationFor from "../components/paginator"
+
+const COLUMNS = 3
+
+/**
+ * Return an array of arrays such that elements modulo three appear at the top, rather than the bottom
+ * e.g. [[1, 2], [3, 4, 5]]
+ * @param pages an array of pages
+ */
+const groupPages = pages => {
+  const count = pages.length % COLUMNS
+  return [take(count, pages), ...splitEvery(COLUMNS, drop(count, pages))]
+}
 
 export interface BlogPageFields {
   slug: string
@@ -62,13 +76,15 @@ const PageListCols = ({
   urlPrefix?: string
 }) => (
   <Container fluid={true}>
-    <Row>
-      {pages.map(({ node }: { node: BlogPage }) => (
-        <Col key={node.fields.slug}>
-          <PageCol page={node} />
-        </Col>
-      ))}
-    </Row>
+    {groupPages(pages).map(row =>
+      <Row>
+        {row.map(({ node }: { node: BlogPage }) => (
+          <Col key={node.fields.slug}>
+            <PageCol page={node} />
+          </Col>
+        ))}
+      </Row>
+    )}
     {numPages > 1 && (
       <Row className="justify-content-md-center">
         <Col md="auto">{paginationFor(urlPrefix, numPages, currentPage)}</Col>

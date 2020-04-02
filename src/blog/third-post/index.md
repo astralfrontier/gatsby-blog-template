@@ -2,6 +2,7 @@
 date: 2020-02-26T22:49:12-08:00
 title: Third Post
 description: What happens now?
+featuredImage: ../../images/Cloud_banner.jpg
 tags:
   - useless
 ---
